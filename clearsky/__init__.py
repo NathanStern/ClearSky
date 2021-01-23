@@ -2,6 +2,7 @@
 import os
 
 from flask import Flask
+from flask import render_template
 
 
 def create_app(test_config=None):
@@ -29,8 +30,8 @@ def create_app(test_config=None):
 
     # a simple page that just says hello
     @app.route('/')
-    def hello():
-        return "Hello, World!"
+    def test_home():
+        return render_template('base.html')
 
     from . import db
     db.init_app(app)
