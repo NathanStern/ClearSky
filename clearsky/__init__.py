@@ -2,6 +2,7 @@
 import os
 
 from flask import Flask
+from flask import render_template
 
 
 def create_app(test_config=None):
@@ -27,11 +28,9 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a simple page that just says hello
-    @app.route('/hello')
-    def hello():
-        return "Hello, World!"
-
+    @app.route('/')
+    def test_home():
+        return render_template('base.html')
 
     from . import homepage
     app.register_blueprint(homepage.bp)
