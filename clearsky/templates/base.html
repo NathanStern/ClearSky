@@ -1,23 +1,22 @@
 <!DOCTYPE html>
 <title>{% block title %}{% endblock %}</title>
-<head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47JTYPXS14"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-47JTYPXS14');
-    </script>
-</head>
 <nav>
     <h1>ClearSky</h1>
 </nav>
 
 <section class="content">
-    <header>
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-47JTYPXS14"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-47JTYPXS14');
+        </script>
+        
         {% block header %}{% endblock %}
-    </header>
+    </head>
     {% block content %}{% endblock %}
 </section>
