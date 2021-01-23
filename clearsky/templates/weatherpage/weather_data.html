@@ -5,6 +5,18 @@
 {% endblock header %}
 
 {% block content %}
+    <p id = "wData"></p>
+    <p id = "pData"></p>
     <iframe width="500" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src={{ url }} allowTransparency="true"></iframe>
     <div>{{ json }}</div>
+
+    <script>
+        let data = JSON.parse({{json | tojson | safe}});
+        let d = new Date(data.current.sunrise * 1000);
+        let hour = d.getHours();
+        let minute = d.getMinutes();
+        let second = d.getSeconds();
+        document.getElementById("wData").innerHTML = `Today's sunrise is ${hour.toString().padStart(2, 0)}:${minute.toString().padStart(2, 0)}:${second.toString().padStart(2, 0)}`;
+
+    </script>
 {% endblock %}
