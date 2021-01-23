@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Home{% endblock %}</h1>
+{% endblock header %}
+
+{% block content %}
+    <form method="post">
+        <label for="address">Input Your Address</label>
+        <input name="address" id="address" placeholder="e.g West Lafayette, IN">
+        <input type="submit" value="Search">
+    </form>
+{% endblock %}

@@ -28,8 +28,15 @@ def create_app(test_config=None):
         pass
 
     # a simple page that just says hello
-    @app.route('/')
+    @app.route('/hello')
     def hello():
         return "Hello, World!"
 
+
+    from . import homepage
+    app.register_blueprint(homepage.bp)
+    
+    from . import weather_data
+    app.register_blueprint(weather_data.bp)
+    
     return app
