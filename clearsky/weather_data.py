@@ -17,4 +17,4 @@ def test():
 def display_data(lat, lon):
     r = requests.get(url_format.format(lat, lon))
     return render_template('weatherpage/weather_data.html', json = r.text, url="http://slowe.github.io/VirtualSky/embed?longitude={}&latitude={}&projection=stereo&constellations=true&constellationlabels=true&showstarlabels=true".format(lon, lat))
-
+  
