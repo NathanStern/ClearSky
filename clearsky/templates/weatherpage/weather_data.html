@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Weather Data{% endblock %}</h1>
+{% endblock header %}
+
+{% block content %}
+    <img id="image" src="http://openweathermap.org/img/wn/10d@2x.png" alt="Weather Icon">
+    <p id = "wData"></p>
+    <p id = "pData"></p>
+    <iframe width="500" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src={{ url }} allowTransparency="true"></iframe>
+    
+    <table id="myTable" class="table table-borderless table-striped table-earning">
+    <thead>
+        <tr>
+        <th>Hour</th>
+        <th>Temperature</th>
+        <th>Cloud Cover</th>
+        <th>Visibility</th>
+        <th>Weather Conditions</th>
+        <th>Condition Report</th>
+        </tr>
+    </thead>
+    <tbody id="testBody"></tbody>
+    </table>
+
+    <script>
+        let data = JSON.parse({{json | tojson | safe}});
+        let d = new Date(data.current.sunset * 1000);
+        let hour = d.getHours();
+        let minute = d.getMinutes();
+        let second = d.getSeconds();
+        document.getElementById("wData").innerHTML = `Today's sunset is ${hour.toString().padStart(2, 0)}:${minute.toString().padStart(2, 0)}:${second.toString().padStart(2, 0)}`;
+        document.getElementById("pData").innerHTML = `Weather: ${data.current.weather[0].main}`;
+        document.getElementById("image").src = `http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`;
+        
+        var hourlyItems = [
+         { time: "now", temp: data.current.temp, clouds: data.current.clouds, visibility: data.current.visibility, weather: data.current.weather.description}
+         ];
+
+        function loadTableData(items) {
+            const table = document.getElementById("testBody");
+            items.forEach( item => {
+            let row = table.insertRow();
+            let time = row.insertCell(0);
+            time.innerHTML = item.time;
+            let temp = row.insertCell(1);
+            temp.innerHTML = item.temp;
+            let clouds = row.insertCell(2);
+            clouds.innerHTML = item.clouds;
+            let visibility = row.insertCell(3);
+            visibility.innerHTML = item.visibility;
+            let weather = row.insertCell(4);
+            weather.innerHTML = item.weather;
+            });
+        }
+        var i;
+    for (i = 1; i < 48; i++) {
+        hourlyItems = [
+         { time: i, temp: data.hourly[i].dt, clouds: data.hourly[i].clouds, visibility: data.hourly[i].visibility, weather: data.hourly[i].weather[0].description}
+         ];
+        loadTableData(hourlyItems);
+    }
+  
+  loadTableData([]);
+    </script>
+{% endblock %}
