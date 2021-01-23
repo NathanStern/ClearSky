@@ -29,7 +29,7 @@ def create_app(test_config=None):
         pass
 
     # a simple page that just says hello
-    @app.route('/hello')
+    @app.route('/')
     def hello():
         return render_template('base.html')
 
