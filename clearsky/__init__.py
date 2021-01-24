@@ -30,7 +30,6 @@ def create_app(test_config=None):
         pass
 
 
-<< << << < HEAD
    @app.route('/hello')
     def test_home():
         return render_template('base.html')
@@ -50,8 +49,8 @@ def create_app(test_config=None):
     from . import blog
     app.register_blueprint(blog.bp)
     app.add_url_rule('/', endpoint='index')
-== == == =
-   if os.path.exists("clearsky/config.json"):
+
+    if os.path.exists("clearsky/config.json"):
         pass
     else:
         with open('clearsky/config.json', 'w') as configuration:
