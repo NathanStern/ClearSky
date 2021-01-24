@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-47JTYPXS14"></script>
     <script>
@@ -11,15 +13,25 @@
     </script>
 
     <script src="{{ url_for('static', filename='admin/admin.js') }}"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </head>
 <title>{% block title %}Administration{% endblock %}</title>
 <nav>
-    <h1>ClearSky</h1>
-    <button class="tablink" style="background-color:blue;color:white;" onclick="openEditMenu(event, 'Radar.io API')">Radar.io API</button>
-    <button class="tablink" style="background-color:darkslategray;color:white;" onclick="openEditMenu(event, 'OpenWeather API')">OpenWeather API</button>
-    <button class="tablink" style="background-color:darkslategray;color:white;" onclick="openEditMenu(event, 'Posts')">Posts</button>
-    <button class="tablink" style="background-color:darkslategray;color:white;" onclick="openEditMenu(event, 'Users')">Users</button>
-    <button class="tablink" style="background-color:darkslategray;color:white;" onclick="openEditMenu(event, 'Administrators')">Administrators</button>
+    <h1>ClearSky Admin</h1>
+    <div class="btn-group">
+        <button class="tablink btn btn-secondary" style="background-color:blue;color:white;" onclick="openEditMenu(event, 'Radar.ioAPI')">Radar.io API</button>
+        <button class="tablink btn btn-secondary" style="background-color:darkslategray;color:white;" onclick="openEditMenu(event, 'OpenWeather API')">OpenWeather API</button>
+        <button class="tablink btn btn-secondary" style="background-color:darkslategray;color:white;" onclick="openEditMenu(event, 'Posts')">Posts</button>
+        <button class="tablink btn btn-secondary" style="background-color:darkslategray;color:white;" onclick="openEditMenu(event, 'Users')">Users</button>
+        <button class="tablink btn btn-secondary" style="background-color:darkslategray;color:white;" onclick="openEditMenu(event, 'Admin')">Admin</button>
+        <button class="btn btn-secondary" stype="background-color:darkslategray;color:white;" onclick="window.location.href = '{{ url_for('admin.logout') }}';">Log Out</button>
+    </div>
 </nav>
 
 <section class="content">
@@ -27,40 +39,93 @@
         {% block header %}{% endblock %}
     </header>
     {% block content %}
-        <div id="Radar.io API" class="tabContent">
-            This is the radar.io config page.
+        <section>
+            <div id="Radar.ioAPI" class="tabContent container-fluid justify-content-center">
+                <Form method="post">
+                    <div class="form-group">
+                        <label for="url-radario">API URL</label>
+                        <input class="form-control" name="url-radario" id="url-radario" value="{{ config["Radar.io-url"] }}" size="50" required></input>
+                        <small class="form-text text-muted" id="urlHelp">Enter the url with '{}' where the query will go</small> 
+                    </div>
+                    <div class="form-group">
+                        <label for="key-radario">API Key</label>
+                        <input class="form-control" name="key-radario" id="key-radario" value="{{ config["Radar.io-key"] }}" size="50" required></input>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Save"></input>
+                </Form>
+            </div>
+        </section>
+
+        <div id="OpenWeather API" class="tabContent container-fluid justify-content-center" style="display:none">
             <Form method="post">
-                <label for="url-radario">API URL</label>
-                <input name="url-radario" id="url-radario" value="{{ config["Radar.io-url"] }}" size="50" required></input>
-                <small id="urlHelp">Enter the url with '{}' where the query will go</small> 
-                <label for="key-radario">API Key</label>
-                <input name="key-radario" id="key-radario" value="{{ config["Radar.io-key"] }}" size="50" required></input>
-                <input type="submit" value="Save"></input>
-            </Form>
+                    <div class="form-group">
+                        <label for="url-openweather">API URL</label>
+                        <input class="form-control" name="url-openweather" id="url-openweather" value="{{ config["OpenWeather-url"] }}" size="50" required></input>
+                        <small class="form-text text-muted" id="urlHelp">Enter the url with '{}' where the latitude and longitude will go</small> 
+                    </div>
+                    <div class="form-group">
+                        <label for="key-openweather">API Key</label>
+                        <input class="form-control" name="key-openweather" id="key-openweather" value="{{ config["OpenWeather-key"] }}" size="50" required></input>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Save"></input>
+                </Form>
         </div>
 
-        <div id="OpenWeather API" class="tabContent testClasss" style="display:none">
-            This is the openweather config page.
-            <Form method="post">
-                <label for="url-openweather">API URL</label>
-                <input name="url-openweather" id="url-openweather" value="{{ config["OpenWeather-url"] }}" size="50" required></input>
-                <small id="urlHelp">Enter the url with '{}' where the latitude and longitude will go</small> 
-                <label for="key-openweather">API Key</label>
-                <input name="key-openweather" id="key-openweather" value="{{ config["OpenWeather-key"] }}" size="50" required></input>
-                <input type="submit" value="Save"></input>
-            </Form>
+        <div id="Posts" class="tabContent container" style="display:none">
+            {% for post in posts %}
+                <article class ="post">
+                    <header>
+                        <div class="card", sytle="width: 10rem;">
+                            <div class="card-body">
+                                <h1 class="card-title">{{ post['title'] }}</h1>
+                                <div class="card-text">
+                                    <p class="text-muted">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</p>
+                                    <p class="body">{{ post['body'] }}</p>
+                                    <a class="action btn btn-primary" href="{{ url_for('admin.delete', id=post['id']) }}">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                </article>
+                {% if not loop.last %}
+                    <hr>
+                {% endif %}
+            {% endfor %}
         </div>
 
-        <div id="Posts" class="tabContent" style="display:none">
-            This is the posts page.
+        <div id="Users" class="tabContent container-fluid" style="display:none">
+            {% for user in users %}
+                <div class="card" style="width: 10rem;">
+                    <div class="card-body">
+                        <h1 class="card-title">{{ user['username'] }}</h1>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
 
-        <div id="Users" class="tabContent" style="display:none">
-            This is the users page.
-        </div>
-
-        <div id="Administrators" class="tabContent" style="display:none">
-            This is the administrators page.
+        <div id="Admin" class="tabContent container card" style="display:none">
+            <div class="card-body">
+                <h1 class="card-title">Change Admin Password (Doesn't Work Yet)</h1>
+                <Form class="card-text" method="post">
+                        {% for message in get_flashed_messages() %}
+                            <p class="alert alert-danger" role="alert">{{ message }}</p>
+                        {% endfor %}
+                        <div class="form-group">
+                            <label for="passold">Old Password</label>
+                            <input type="password" class="form-control" name="passold" id="passold" value="" required></input>
+                        </div>
+                        <div class="form-group">
+                            <label for="passnew">New Password</label>
+                            <input type="password" class="form-control" name="passnew" id="passnew" value="" required></input>
+                            <small class="form-text text-muted" id="newpasshelp">New password must not be the same as old password</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm">Confirm Password</label>
+                            <input type="password" class="form-control" name="confirm" id="confirm" value="" required></input>
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Save"></input>
+                    </Form>
+                </div>
         </div>
     {% endblock %}
 </section>
