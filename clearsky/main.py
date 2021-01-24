@@ -9,6 +9,6 @@ app = create_app()
 
 with app.app_context():
 
-    if not os.path.exists(current_app.instance_path.join('clearsky.sqlite')):
+    if not os.path.exists(current_app.instance_path + "/" + ('clearsky.sqlite')):
         print("Initializing database for first-time use")
         db.init_db()
