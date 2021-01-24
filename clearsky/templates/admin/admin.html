@@ -30,16 +30,25 @@
         <div id="Radar.io API" class="tabContent">
             This is the radar.io config page.
             <Form method="post">
-                <label for="url-openweather">API URL Format</label>
-                <input name="url-openweather" id="url-openweather" required></input>
-                <label for="key-openweather">API Key</label>
-                <input name="key-openweather" id="key-openweather" required></input>
+                <label for="url-radario">API URL</label>
+                <input name="url-radario" id="url-radario" value="{{ config["Radar.io-url"] }}" size="50" required></input>
+                <small id="urlHelp">Enter the url with '{}' where the query will go</small> 
+                <label for="key-radario">API Key</label>
+                <input name="key-radario" id="key-radario" value="{{ config["Radar.io-key"] }}" size="50" required></input>
                 <input type="submit" value="Save"></input>
             </Form>
         </div>
 
         <div id="OpenWeather API" class="tabContent testClasss" style="display:none">
             This is the openweather config page.
+            <Form method="post">
+                <label for="url-openweather">API URL</label>
+                <input name="url-openweather" id="url-openweather" value="{{ config["OpenWeather-url"] }}" size="50" required></input>
+                <small id="urlHelp">Enter the url with '{}' where the latitude and longitude will go</small> 
+                <label for="key-openweather">API Key</label>
+                <input name="key-openweather" id="key-openweather" value="{{ config["OpenWeather-key"] }}" size="50" required></input>
+                <input type="submit" value="Save"></input>
+            </Form>
         </div>
 
         <div id="Posts" class="tabContent" style="display:none">

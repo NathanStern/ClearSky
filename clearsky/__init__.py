@@ -2,6 +2,7 @@
 import os
 
 from flask import Flask
+import json
 
 
 def create_app(test_config=None):
@@ -27,7 +28,22 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    if os.path.exists("clearsky/config.json"):
+        pass
+    else:
+        with open('clearsky/config.json', 'w') as configuration:
+            print("Opened config file")
+            configuration.write("""
+{
+    "OpenWeather-url": " ",
+    "OpenWeather-key": " ",
+    "Radar.io-url": "https://api.radar.io/v1/geocode/forward?query={}",
+    "Radar.io-key": " "
+}
+            """)
+
     # a simple page that just says hello
+
     @app.route('/hello')
     def hello():
         return "Hello, World!"

@@ -12,6 +12,7 @@ import json
 
 bp = Blueprint('admin', __name__, url_prefix='/admin')
 
+
 # Creates a new view that wraps the original.
 # If a user is not logged in, the user is redirected.
 # If they are, the original view is shown
@@ -40,18 +41,34 @@ def admin_home():
     if request.method == "POST":
         if 'url-openweather' in request.form:
             data = None
-            with open("config.json", 'r') as json_file:
+            with open('clearsky/config.json', 'r') as json_file:
                 data = json.load(json_file)
+                json_file.close()
 
             data["OpenWeather-url"] = request.form["url-openweather"]
             data["OpenWeather-key"] = request.form["key-openweather"]
 
-            with open("config.json", "w") as json_file:
-                json.dump(data)
-        elif 'url-radario' in request.form:
-            pass
+            with open('clearsky/config.json', "w") as json_file:
+                json_output = json.dumps(data, sort_keys=True, indent=4)
+                json_file.write(json_output)
 
-    return render_template('admin/admin.html')
+                json_file.close()
+        elif 'url-radario' in request.form:
+            data = None
+            with open('clearsky/config.json', 'r') as json_file:
+                data = json.load(json_file)
+                json_file.close()
+
+            data["Radar.io-url"] = request.form["url-radario"]
+            data["Radar.io-key"] = request.form["key-radario"]
+
+            with open('clearsky/config.json', "w") as json_file:
+                json_output = json.dumps(data, sort_keys=True, indent=4)
+                json_file.write(json_output)
+
+                json_file.close()
+
+    return render_template('admin/admin.html', config=json.load(open('clearsky/config.json', 'r')))
 
 
 @bp.route('/logout', methods=('GET', 'POST'))
