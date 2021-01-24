@@ -1,21 +1,45 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h1>{% block title %}Weather Data{% endblock %}</h1>
+    <h1>{% block title %}Weather Data for {{ lat }}, {{ lon }} {% endblock %}</h1>
 {% endblock header %}
 
 {% block content %}
-    <img id="image" src="http://openweathermap.org/img/wn/10d@2x.png" alt="Weather Icon">
+<div class="border-top my-3"></div>
+<div class="container-fluid">
+
+<div class="row">
+
+<div class="col-4">
+<div class="container">
+
+    <iframe width="500" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src={{ url }} allowTransparency="true"></iframe>
+ </div>
+ </div>
+
+ <div class="col-1">
+ </div>
+ <div class="col-3">
+
+    
+<h1 class="display-5">
     <p id = "wData"></p>
     <p id = "pData"></p>
     <p id = "cTemp"></p>
-    <iframe width="500" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src={{ url }} allowTransparency="true"></iframe>
-    
+    </h1>
+</div>
+ <div class="col-1">
+ </div>
+<div class="col-3">
+<img id="image" src="http://openweathermap.org/img/wn/10d@2x.png" alt="Weather Icon" width="200" height="200">
+ </div>
+ </div> 
+ </div> 
     <table id="myTable" class="table table-borderless table-striped table-earning">
     <thead>
         <tr>
         <th>Hour</th>
-        <th>Temperature</th>
+        <th>Temperature (F)</th>
         <th>Cloud Cover</th>
         <th>Visibility</th>
         <th>Weather Conditions</th>
@@ -52,7 +76,7 @@
 
             let temp = row.insertCell(1);
             temp.innerHTML = item.temp;
-            temp.style.backgroundColor = "rgba(11, 217, 110, 0.6)";
+            temp.style.backgroundColor = "rgba(11, 217, 110, 0.4)";
             if (item.temp < 50) {
                 temp.style.backgroundColor = "rgba(255, 255 ,0, 0.4)";
                 yellow = 1;
@@ -75,24 +99,25 @@
             let visibility = row.insertCell(3);
             visibility.innerHTML = item.visibility;
             visibility.style.backgroundColor = "rgba(11, 217, 110, 0.4)";
-             if (item.visibility < 12000) {
+             if (item.visibility < 8000) {
                 visibility.style.backgroundColor = "rgba(255, 255 ,0, 0.4)";
                 yellow = 1;
             }
-            if (item.visibility < 8000) {
+            if (item.visibility < 5000) {
                 visibility.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
                 red = 1;
             }
             let weather = row.insertCell(4);
             weather.innerHTML = item.weather;
-            weather.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
-                red = 1;
-             if (item.wId > 800) {
+            weather.style.backgroundColor = "rgba(11, 217, 110, 0.4)";
+            
+            if (item.wId > 800) {
                 weather.style.backgroundColor = "rgba(255, 255 ,0, 0.4)";
                 yellow = 1;
             }
-            if (item.visibility == 800) {
-                visibility.style.backgroundColor = "rgba(11, 217, 110, 0.4)";
+            if (item.wId < 800) {
+                weather.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+                red = 1;
             }
         
             let light = row.insertCell(5);
