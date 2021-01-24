@@ -46,6 +46,13 @@
             time.innerHTML = item.time;
             let temp = row.insertCell(1);
             temp.innerHTML = item.temp;
+
+            if (item.time < 50) {
+                temp.style.backgroundColor = "rgba(255, 255 ,0, 0.6)";
+            }
+            if (item.temp < 32) {
+                temp.style.backgroundColor = "rgba(255, 0, 0, 0.6)";
+            }
             let clouds = row.insertCell(2);
             clouds.innerHTML = item.clouds;
             let visibility = row.insertCell(3);
@@ -57,7 +64,7 @@
         var i;
     for (i = 1; i < 48; i++) {
         hourlyItems = [
-         { time: i, temp: data.hourly[i].dt, clouds: data.hourly[i].clouds, visibility: data.hourly[i].visibility, weather: data.hourly[i].weather[0].description}
+         { time: i, temp: data.hourly[i].temp, clouds: data.hourly[i].clouds, visibility: data.hourly[i].visibility, weather: data.hourly[i].weather[0].description}
          ];
         loadTableData(hourlyItems);
     }
