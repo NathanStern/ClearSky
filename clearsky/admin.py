@@ -23,7 +23,7 @@ bp = Blueprint('admin', __name__, url_prefix='/admin')
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
-        if g.user is None or session['admin'] != 1:
+        if session['admin'] != 1:
             return redirect(url_for('admin.login'))
 
         return view(**kwargs)
