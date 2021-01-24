@@ -1,0 +1,39 @@
+ {% extends 'base.html' %}
+
+{% block title %}Posts{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="container-fluid card-body">
+            <div class="row justify-content-center">
+                <div class="col-sm"><h3>Posts</h3></div>
+                {% if g.user %}
+                    <div class=""><span></span><button class="btn btn-primary float-right" onclick="window.location.href='{{ url_for('blog.create') }}';">New Post</button></div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% for post in posts %}
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="card col-5 border-secondary mb-3">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h4>{{ post['title'] }}</h4>
+                            <small class="text-muted">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</small>
+                        </div>
+                        <div class="card-text">
+                            <p>{{ post['body'] }}</p>
+                            {% if session['user_id'] == post['author_id'] %}
+                                <button class="btn btn-primary" onclick="window.location.href = '{{ url_for('blog.update', id=post['id']) }}';">Edit</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if not loop.last %}
+            <hr>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
