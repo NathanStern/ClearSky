@@ -1,13 +1,31 @@
 {% extends 'base.html' %}
-
 {% block header %}
-    <h1>{% block title %}Home{% endblock %}</h1>
+    <h3>{% block title %}Home{% endblock %}</h3>
 {% endblock header %}
 
 {% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-sm-6">
+            <div class="jumbotron">
+            <h1>See the stars!</h1>
+            <p>Welcome to ClearSky! Here you can find the ideal conditions for stargazing. 
+            Enter your location and the site will give info on current weather conditions</p>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <h2>Blog</h2>
+            <div class="jumbotron">
+            </div>
+        </div>
+    </div>
+
+    
     <form method="post">
         <label for="address">Input Your Address</label>
-        <input name="address" id="address" placeholder="e.g West Lafayette, IN">
+        <input name="address" id="address" placeholder="e.g. West Lafayette, IN">
         <input type="submit" value="Search">
     </form>
+    </div>
+</div>
 {% endblock %}
