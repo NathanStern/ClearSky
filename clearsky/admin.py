@@ -51,10 +51,9 @@ def login():
             session['user_id'] = user['id']
             session['username'] = user['username']
             session['admin'] = 1
-            flash(session['admin'])
             return redirect(url_for('admin.admin_home'))
 
-        flash(session['admin'])
+        flash(error)
 
     return render_template('admin/login.html')
 
