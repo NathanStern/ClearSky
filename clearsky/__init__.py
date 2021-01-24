@@ -32,13 +32,12 @@ def create_app(test_config=None):
     def test_home():
         return render_template('base.html')
 
-<<<<<<< HEAD
     from . import homepage
     app.register_blueprint(homepage.bp)
 
     from . import weather_data
     app.register_blueprint(weather_data.bp)
-=======
+
     from . import db
     db.init_app(app)
 
@@ -48,6 +47,5 @@ def create_app(test_config=None):
     from . import blog
     app.register_blueprint(blog.bp)
     app.add_url_rule('/', endpoint='index')
->>>>>>> user-auth
 
     return app
