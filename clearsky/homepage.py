@@ -8,8 +8,6 @@ import json
 
 bp = Blueprint('home', __name__)
 
-# url_format = "https://api.radar.io/v1/geocode/forward?query={}"
-# headers = {'Authorization': 'prj_test_sk_47928039de151f97a0ec5e38c8b9e085a4d45efb'}
 url_format = ""
 headers = "{}"
 

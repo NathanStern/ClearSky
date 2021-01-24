@@ -7,8 +7,6 @@ import json
 
 bp = Blueprint('weather-data', __name__, url_prefix='/weather_data')
 
-# url_format = "https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&exclude=minutely,daily,alerts&appid={}&units=imperial"
-# api_key = "536159a5b4c02240e63a25443055734b"
 url_format = ""
 api_key = ""
 
