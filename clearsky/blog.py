@@ -7,7 +7,7 @@ from werkzeug.exceptions import abort
 from clearsky.auth import login_required
 from clearsky.db import get_db
 
-bp = Blueprint('blog', __name__)
+bp = Blueprint('blog', __name__, url_prefix='/auth')
 
 @bp.route('/')
 def index():
