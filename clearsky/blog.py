@@ -18,4 +18,3 @@ def index():
         ' ORDER BY created DESC'
     ).fetchall()
     return render_template('blog/index.html', posts=posts)
-    
