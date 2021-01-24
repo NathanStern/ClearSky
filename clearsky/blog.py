@@ -19,7 +19,7 @@ def index():
     ).fetchall()
     return render_template('blog/index.html', posts=posts)
 
-@bp_route('/create', methods=('GET', 'POST'))
+@bp.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
     if request.method == 'POST':
