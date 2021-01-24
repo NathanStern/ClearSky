@@ -74,10 +74,12 @@ def load_logged_in_user():
     if user_id is None:
         session.clear()
         g.user = None
+        session['admin'] = 0
     else:
         g.user = get_db().execute(
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
+        session['admin'] = 0
 
 
 @bp.route('/logout')
