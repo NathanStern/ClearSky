@@ -16,5 +16,5 @@ def test():
 @bp.route('/lat=<float(signed=true):lat>/lon=<float(signed=true):lon>', methods=('GET', 'POST'))
 def display_data(lat, lon):
     r = requests.get(url_format.format(lat, lon))
-    return render_template('weatherpage/weather_data.html', json = r.text, url="http://slowe.github.io/VirtualSky/embed?longitude={}&latitude={}&projection=stereo&constellations=true&constellationlabels=true&showstarlabels=true".format(lon, lat))
+    return render_template('weatherpage/weather_data.html', lat = lat, lon = lon, json = r.text, url="http://slowe.github.io/VirtualSky/embed?longitude={}&latitude={}&projection=stereo&constellations=true&constellationlabels=true&showstarlabels=true".format(lon, lat))
   
