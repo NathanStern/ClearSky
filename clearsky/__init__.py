@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+from . import admin
 import os
 
 from flask import Flask
@@ -29,8 +30,7 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-
-   @app.route('/hello')
+    @app.route('/hello')
     def test_home():
         return render_template('base.html')
 
@@ -69,9 +69,8 @@ def create_app(test_config=None):
     @app.route('/hello')
     def hello():
         return "Hello, World!"
->>>>>> > admin-site
 
-   from . import admin
+    from . import admin
     app.register_blueprint(admin.bp)
 
     return app
