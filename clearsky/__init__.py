@@ -49,20 +49,6 @@ def create_app(test_config=None):
     from . import blog
     app.register_blueprint(blog.bp)
 
-    if os.path.exists("clearsky/config.json"):
-        pass
-    else:
-        with open('clearsky/config.json', 'w') as configuration:
-            print("Opened config file")
-            configuration.write("""
-{
-    "OpenWeather-url": "https://api.openweathermap.org/data/2.5/onecall?lat={}&lon={}&exclude=minutely,daily,alerts&appid={}&units=imperial",
-    "OpenWeather-key": "",
-    "Radar.io-url": "https://api.radar.io/v1/geocode/forward?query={}",
-    "Radar.io-key": ""
-}
-            """)
-
     # a simple page that just says hello
 
     @app.route('/hello')
