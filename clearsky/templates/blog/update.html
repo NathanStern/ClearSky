@@ -5,16 +5,30 @@
 {% endblock %}
 
 {% block content %}
-    <form method="post">
-        <label for="title">Title</label>
-        <input name="title" id="title"
-            value="{{ request.form['title'] or post['title'] }}" required>
-        <label for="body">Body</label>
-        <textarea name="body" id="body">{{ request.form['body'] or post['body'] }}</textarea>
-        <input type="submit" value="Save">
+    <form class="card" method="post">
+        <div class="card-body">
+            <div class="card-title">
+                <h3>New Post</h3>
+            </div>
+            <div class="card-text">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input class="form-control" name="title" id="title" value="{{ request.form['title'] or post['title'] }}" required>
+                </div>
+                <div class="form-group">
+                    <label class="float-up" for="body">Body</label>
+                    <textarea class="form-control" name="body" id="body">{{ request.form['body'] or post['body'] }}</textarea>
+                </div>
+                <input class="btn btn-primary" type="submit" value="Save">
+            </div>
+        </div>
     </form>
     <hr>
-    <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
-        <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+    <form class="card" action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
+        <div class="card-body">
+            <div class="card-text">
+                <input class="btn btn-danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+            </div>
+        </div>
     </form>
     {% endblock %}

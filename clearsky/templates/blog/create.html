@@ -1,15 +1,24 @@
 {% extends 'base.html' %}
 
-{% block header %}
-    <h1>{% block title %}New Post{% endblock %}</h1>
-{% endblock %}
+{% block title %}New Post{% endblock %}
 
 {% block content %}
-    <form method="post">
-        <label for="title">Title</label>
-        <input name="title" id="title" value="{{ request.form['title'] }}" required>
-        <label for="body">Body</label>
-        <textarea name="body" id="body">{{ request.form['body'] }}</textarea>
-        <input type="submit" value="Save">
+    <form class="card" method="post">
+        <div class="card-body">
+            <div class="card-title">
+                <h3>New Post</h3>
+            </div>
+            <div class="card-text">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input class="form-control" name="title" id="title" value="{{ request.form['title'] }}" required>
+                </div>
+                <div class="form-group">
+                    <label class="float-up" for="body">Body</label>
+                    <textarea class="form-control" name="body" id="body">{{ request.form['body'] }}</textarea>
+                </div>
+                <input class="btn btn-primary" type="submit" value="Save">
+            </div>
+        </div>
     </form>
     {% endblock %}
