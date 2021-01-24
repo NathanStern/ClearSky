@@ -8,6 +8,8 @@ from flask.signals import request_started
 
 from werkzeug.security import check_password_hash, generate_password_hash
 
+import json
+
 bp = Blueprint('admin', __name__, url_prefix='/admin')
 
 # Creates a new view that wraps the original.
@@ -35,7 +37,21 @@ def login():
 @bp.route('/', methods=('GET', 'POST'))
 @login_required
 def admin_home():
-    return render_template('admin-site/admin.html')
+    if request.method == "POST":
+        if 'url-openweather' in request.form:
+            data = None
+            with open("config.json", 'r') as json_file:
+                data = json.load(json_file)
+
+            data["OpenWeather-url"] = request.form["url-openweather"]
+            data["OpenWeather-key"] = request.form["key-openweather"]
+
+            with open("config.json", "w") as json_file:
+                json.dump(data)
+        elif 'url-radario' in request.form:
+            pass
+
+    return render_template('admin/admin.html')
 
 
 @bp.route('/logout', methods=('GET', 'POST'))

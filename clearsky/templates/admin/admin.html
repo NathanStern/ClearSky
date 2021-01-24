@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-47JTYPXS14"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-47JTYPXS14');
+    </script>
+
+    <script src="{{ url_for('static', filename='admin/admin.js') }}"></script>
+</head>
+<title>{% block title %}Administration{% endblock %}</title>
+<nav>
+    <h1>ClearSky</h1>
+    <button class="tablink" style="background-color:blue;color:white;" onclick="openEditMenu(event, 'Radar.io API')">Radar.io API</button>
+    <button class="tablink" style="background-color:darkslategray;color:white;" onclick="openEditMenu(event, 'OpenWeather API')">OpenWeather API</button>
+    <button class="tablink" style="background-color:darkslategray;color:white;" onclick="openEditMenu(event, 'Posts')">Posts</button>
+    <button class="tablink" style="background-color:darkslategray;color:white;" onclick="openEditMenu(event, 'Users')">Users</button>
+    <button class="tablink" style="background-color:darkslategray;color:white;" onclick="openEditMenu(event, 'Administrators')">Administrators</button>
+</nav>
+
+<section class="content">
+    <header>
+        {% block header %}{% endblock %}
+    </header>
+    {% block content %}
+        <div id="Radar.io API" class="tabContent">
+            This is the radar.io config page.
+            <Form method="post">
+                <label for="url-openweather">API URL Format</label>
+                <input name="url-openweather" id="url-openweather" required></input>
+                <label for="key-openweather">API Key</label>
+                <input name="key-openweather" id="key-openweather" required></input>
+                <input type="submit" value="Save"></input>
+            </Form>
+        </div>
+
+        <div id="OpenWeather API" class="tabContent testClasss" style="display:none">
+            This is the openweather config page.
+        </div>
+
+        <div id="Posts" class="tabContent" style="display:none">
+            This is the posts page.
+        </div>
+
+        <div id="Users" class="tabContent" style="display:none">
+            This is the users page.
+        </div>
+
+        <div id="Administrators" class="tabContent" style="display:none">
+            This is the administrators page.
+        </div>
+    {% endblock %}
+</section>
