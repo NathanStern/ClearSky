@@ -59,6 +59,7 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
+            session['username'] = user['username']
             return redirect(url_for('index'))
 
         flash(error)
@@ -71,6 +72,7 @@ def load_logged_in_user():
     user_id = session.get('user_id')
 
     if user_id is None:
+        session.clear()
         g.user = None
     else:
         g.user = get_db().execute(
