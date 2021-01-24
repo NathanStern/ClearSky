@@ -6,6 +6,8 @@ from flask.signals import request_started
 import requests
 import json
 
+from clearsky.db import get_db
+
 bp = Blueprint('home', __name__)
 
 url_format = ""
@@ -33,4 +35,11 @@ def home():
         lon = (return_coords["addresses"][0]["longitude"])
 
         return redirect(url_for('weather-data.display_data', lat=lat, lon=lon))
-    return render_template('homepage/home.html')
+
+    db = get_db()
+
+    posts = db.execute(
+        'SELECT * FROM post'
+    ).fetchall()
+
+    return render_template('homepage/home.html', posts=posts)

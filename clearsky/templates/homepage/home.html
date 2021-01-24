@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
-{% block header %}
-    <h3>{% block title %}Home{% endblock %}</h3>
-{% endblock header %}
+
+{% block header %}<h1> </h1>{% endblock%}
+
+{% block title %}Home{% endblock %}
+
 
 {% block content %}
 <div class="container">
@@ -11,20 +13,43 @@
             <h1>See the stars!</h1>
             <p>Welcome to ClearSky! Here you can find the ideal conditions for stargazing. 
             Enter your location and the site will give info on current weather conditions</p>
+
+            <form method="post">
+                <div class="form-group">
+                    <label for="address">Input Your Address</label>
+                    <input class="form-control" name="address" id="address" placeholder="e.g. West Lafayette, IN">
+                </div>
+                <input class="btn btn-primary" type="submit" value="Search">
+            </form>
             </div>
         </div>
         <div class="col-md-4 col-sm-6">
-            <h2>Blog Section</h2>
+            <h2>Blog Section<button class="btn btn-primary float-right" onclick="window.location.href = '{{ url_for('blog.index') }}';">View Blog</button></h2>
             <div class="jumbotron">
+                <h3>Recent Posts</h3>
+                {% for post in posts %}
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="card border-secondary" style="width:20rem;">
+                                <div class="card-body">
+                                    <div class="card-title">
+                                        <h4>{{ post['title'] }}</h4>
+                                        <small class="text-muted">by {{ post['username'] }} on {{ post['created'].strftime('%Y-%m-%d') }}</small>
+                                    </div>
+                                    <div class="card-text">
+                                        <p>{{ post['body'] }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if not loop.last %}
+                        <hr>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>
-
-    <form method="post">
-        <label for="address">Input Your Address</label>
-        <input name="address" id="address" placeholder="e.g. West Lafayette, IN">
-        <input type="submit" value="Search">
-    </form>
     </div>
 </div>
 {% endblock %}

@@ -25,12 +25,12 @@
 </head>
 
 <body>
-<nav>
-    <h1>ClearSky</h1>
-</nav>
 <!-- NavBar -->
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a class="navbar-brand" href="{{ url_for('home.home') }}">Home</a>
+    <h1 class="navbar-brand">ClearSky</h1>
+    <div class="navbar-nav">
+        <a class="nav-link" href="{{ url_for('home.home') }}">Home</a>
+    </div>
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -40,8 +40,13 @@
             <a class="nav-link" href="{{ url_for('blog.index') }}">Blog</a>
         </div>
         <div class="navbar-nav ml-auto">
-            <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-            <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
+            {% if not g.user %}
+                <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
+            {% else %}
+                <a class="nav-link" href="#">{{ session["username"] }}</a>
+                <a class="nav-link" href="{{ url_for('auth.logout') }}">Log Out</a>
+            {% endif %}
         </div>
     </div>  
   </nav>
