@@ -9,6 +9,7 @@ from clearsky.db import get_db
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
+
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
@@ -38,6 +39,7 @@ def register():
 
     return render_template('auth/register.html')
 
+
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
@@ -57,28 +59,33 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
-            return redirect(url_for('index'))
+            session['username'] = user['username']
+            return redirect(url_for('home.home'))
 
         flash(error)
 
     return render_template('auth/login.html')
+
 
 @bp.before_app_request
 def load_logged_in_user():
     user_id = session.get('user_id')
 
     if user_id is None:
+        session.clear()
         g.user = None
     else:
         g.user = get_db().execute(
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
 
+
 @bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('index'))
-    
+    return redirect(url_for('home.home'))
+
+
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
