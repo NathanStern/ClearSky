@@ -30,6 +30,7 @@
         <button class="tablink btn btn-secondary" style="background-color:darkslategray;color:white;" onclick="openEditMenu(event, 'Posts')">Posts</button>
         <button class="tablink btn btn-secondary" style="background-color:darkslategray;color:white;" onclick="openEditMenu(event, 'Users')">Users</button>
         <button class="tablink btn btn-secondary" style="background-color:darkslategray;color:white;" onclick="openEditMenu(event, 'Admin')">Admin</button>
+        <button class="btn btn-secondary" stype="background-color:darkslategray;color:white;" onclick="window.location.href = '{{ url_for('admin.logout') }}';">Log Out</button>
     </div>
 </nav>
 
@@ -104,23 +105,23 @@
 
         <div id="Admin" class="tabContent container card" style="display:none">
             <div class="card-body">
-                <h1 class="card-title">Change Admin Password</h1>
+                <h1 class="card-title">Change Admin Password (Doesn't Work Yet)</h1>
                 <Form class="card-text" method="post">
                         {% for message in get_flashed_messages() %}
                             <p class="alert alert-danger" role="alert">{{ message }}</p>
                         {% endfor %}
                         <div class="form-group">
                             <label for="passold">Old Password</label>
-                            <input class="form-control" name="passold" id="passold" value="" required></input>
+                            <input type="password" class="form-control" name="passold" id="passold" value="" required></input>
                         </div>
                         <div class="form-group">
                             <label for="passnew">New Password</label>
-                            <input class="form-control" name="passnew" id="passnew" value="" required></input>
+                            <input type="password" class="form-control" name="passnew" id="passnew" value="" required></input>
                             <small class="form-text text-muted" id="newpasshelp">New password must not be the same as old password</small>
                         </div>
                         <div class="form-group">
                             <label for="confirm">Confirm Password</label>
-                            <input class="form-control" name="confirm" id="confirm" value="" required></input>
+                            <input type="password" class="form-control" name="confirm" id="confirm" value="" required></input>
                         </div>
                         <input class="btn btn-primary" type="submit" value="Save"></input>
                     </Form>

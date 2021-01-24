@@ -23,20 +23,25 @@
     <title>ClearSky - Admin Log In</title>
 </head>
 <body>
-    <div class="row justify-content-center align-middle">
-        <h1>Admininistrator Log In</h1>
-    </div>
     <section class="container justify-content-center">
-        <form method="post">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input class="form-control" name="username" id="username" value="admin" disabled>
+        <div class="container card">
+            <div class="card-body">
+                <h4 class="card-title">Administrator Log In</h4>
+                <form class="card-text" method="post">
+                    {% for message in get_flashed_messages() %}
+                    <p class="alert alert-danger" role="alert">{{ message }}</p>
+                    {% endfor %}
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input class="form-control" name="username" id="username" value="admin" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input class="form-control" type="password" name="password" id="password" required>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Log In">
+                </form>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input class="form-control" type="password" name="password" id="password" required>
             </div>
-            <input class="btn btn-primary" type="submit" value="Log In">
-        </form>
     </section>
 <body>

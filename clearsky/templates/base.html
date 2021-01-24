@@ -1,5 +1,13 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
+    <!-- Meta data and bootstrap CDN-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-47JTYPXS14"></script>
     <script>
@@ -9,28 +17,40 @@
 
     gtag('config', 'G-47JTYPXS14');
     </script>
+    
+    <title>{% block title %}{% endblock %} - Clearsky</title>
+    <style>
+    
+    </style>
 </head>
-<title>{% block title %}{% endblock %} - ClearSky</title>
 
+<body>
 <nav>
     <h1>ClearSky</h1>
-    <ul>
-        {% if g.user %}
-            <li><span>{{ session["username"] }}</span>
-            <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
-        {% else %}
-            <li><a href="{{ url_for('auth.register') }}">Register</a>"
-            <li><a href="{{ url_for ('auth.login') }}">Log In</a>"
-        {% endif %}
-    </ul>
 </nav>
-
+<!-- NavBar -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="{{ url_for('home.home') }}">Home</a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <div class="navbar-nav">
+            <a class="nav-link" href="#">Blog</a>
+            <a class="nav-link" href="#">Account</a>
+        </div>
+        <div class="navbar-nav ml-auto">
+            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link" href="#">Register</a>
+        </div>
+    </div>  
+  </nav>
 <section class="content">
     <header>
         {% block header %}{% endblock %}
     </header>
-    {% for message in get_flashed_messages() %}
-        <div class = "flash">{{ message }}</div>
-    {% endfor %}
     {% block content %}{% endblock %}
 </section>
+</body>
+</html>

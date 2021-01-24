@@ -17,3 +17,7 @@ function openEditMenu(event, tabName) {
     event.currentTarget.style.backgroundColor = "blue";
     event.currentTarget.style.color = "white"
 }
+
+function logout() {
+
+}
