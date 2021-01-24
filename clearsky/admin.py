@@ -34,7 +34,6 @@ def login_required(view):
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
-        # username = request.form['username']
         username = 'admin'
         password = request.form['password']
         db = get_db()
@@ -52,9 +51,10 @@ def login():
             session['user_id'] = user['id']
             session['username'] = user['username']
             session['admin'] = 1
+            flash(session['admin'])
             return redirect(url_for('admin.admin_home'))
 
-        flash(error)
+        flash(session['admin'])
 
     return render_template('admin/login.html')
 

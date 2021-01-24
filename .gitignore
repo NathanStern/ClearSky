@@ -4,7 +4,7 @@ __pycache__/
 *$py.class
 
 # configuration files
-config.json
+clearsky/config.json
 
 # C extensions
 *.so
